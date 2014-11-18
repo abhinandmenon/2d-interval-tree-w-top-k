@@ -14,24 +14,24 @@ public:
     : _id(id), _low(low), _high(high), _max_timestamp(max_timestamp) {};
   
   std::string GetId() const {return _id};
-  int GetLowPoint() const {return _low};
-  int GetHighPoint() const {return _high};
-  int GetMaxTimeStamp() const {return _max_timestamp};
+  long long GetLowPoint() const {return _low};
+  long long GetHighPoint() const {return _high};
+  long long GetMaxTimeStamp() const {return _max_timestamp};
 
 protected:
   std::string _id;
-  int _low;
-  int _high;
-  int _max_timestamp;
+  long long _low;
+  long long _high;
+  long long _max_timestamp;
 };
 
 class TwoD_IT_w_TopK {
 public:
   IntervalTree();
   IntervalTree(const std::string & filename);
-  void insertInterval(std::string id, int minKey, int maxKey, int maxTimestamp);
+  void insertInterval(std::string id, long long minKey, long long maxKey, long long maxTimestamp);
   void deleteInterval(std::string id);
-  std::vector<TwoD_Interval> topK(int minKey, int maxKey, int k);
+  std::vector<TwoD_Interval> topK(long long minKey, long long maxKey, int k);
   void sync(const std::string & filename);
 
 private:
