@@ -31,7 +31,7 @@ public:
   IntervalTree(const std::string & filename);
   void insertInterval(std::string id, int minKey, int maxKey, int maxTimestamp);
   void deleteInterval(std::string id);
-  std::vector<TwoD_Interval> topK(int Key, int k);
+  std::vector<TwoD_Interval> topK(int minKey, int maxKey, int k);
   void sync(const std::string & filename);
 
 private:
