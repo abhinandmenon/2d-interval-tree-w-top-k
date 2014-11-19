@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "misc.h"
-#include <iostream.h>
+#include <ostream>
 
 #ifndef DEFAULT_INITIAL_SIZE
 #define DEFAULT_INITIAL_SIZE 16
@@ -31,9 +31,29 @@
 //
 // ********************************************************
 
+// Declaration for TemplateStack, so that overloaded operator<< definition can
+// be moved above TemplateStack definition. This was done to remove a compile
+// time error in the friend function definition.
+// Note: There might be a nicer way of resolving this.
+template <class Type>
+class TemplateStack;
+
+
+template <class Type>
+std::ostream & operator<<(std::ostream & s, TemplateStack<Type> & theStack) 
+{
+  s << "TemplateStack has currentSize = " << theStack.currentSize << std::endl;
+  s << "maxSize = " << theStack.maxSize << std::endl;
+  s << "Contents of this TemplateStack are :" << std::endl ;
+  for (int k = 0; k < theStack.currentSize ; k++)
+    s << theStack.arrayData[k] << std::endl;
+  return s;
+}
+
+
 template <class Type>
 class TemplateStack {
-  friend ostream & operator<<<Type>(ostream &,TemplateStack<Type> &) ;
+  friend std::ostream & operator<<<Type>(std::ostream &,TemplateStack<Type> &) ;
  public:
   TemplateStack(int size = DEFAULT_INITIAL_SIZE)
     : currentSize(0) ,
@@ -353,17 +373,6 @@ private:
     return(arrayData);
   }
 };
-
-template <class Type>
-ostream & operator<<(ostream & s, TemplateStack<Type> & theStack) 
-{
-  s << "TemplateStack has currentSize = " << theStack.currentSize << endl;
-  s << "maxSize = " << theStack.maxSize << endl;
-  s << "Contents of this TemplateStack are :" << endl ;
-  for (int k = 0; k < theStack.currentSize ; k++)
-    s << theStack.arrayData[k] << endl;
-  return s;
-}
 
 
 #endif

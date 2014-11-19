@@ -6,7 +6,7 @@
 #include"TemplateStack.H"
 #include<math.h>
 #include<limits.h>
-#include<iostream.h>
+#include<ostream>
 
 //  The interval_tree.h and interval_tree.cc files contain code for 
 //  interval trees implemented using red-black-trees as described in 
