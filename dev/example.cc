@@ -6,6 +6,7 @@ int main() {
 
 TwoD_IT_w_TopK a;
 
+// Insert intervals (id, minKey, maxKey, maxTimestamp)
 std::cout<<std::endl<<"Inserting intervals:"<<std::endl
          <<"(a,m,1)"<<std::endl
          <<"(b,d,2)"<<std::endl
@@ -26,18 +27,20 @@ a.insertInterval("6", "q", "x", 7);
 a.insertInterval("7", "h", "i", 8);
 a.insertInterval("8", "b", "t", 9);
 
+// Call top-k (minKey, maxKey, k)
 std::cout<<std::endl<<"Top-4 intervals that overlap with (n,o):"<<std::endl;
 std::vector<TwoD_Interval> r = a.topK("n", "o", 4);
 for(std::vector<TwoD_Interval>::const_iterator it = r.begin(); it != r.end(); it++) {
   std::cout<<"("<<it->GetLowPoint()<<","<<it->GetHighPoint()<<","<<it->GetMaxTimeStamp()<<")"<<std::endl;
   }
 
+// Delete interval (id)
 std::cout<<std::endl<<"Deleting (n,w)"<<std::endl;
 a.deleteInterval("4");
 
 std::cout<<std::endl<<"Top-4 intervals that overlap with (n,o):"<<std::endl;
-std::vector<TwoD_Interval> s = a.topK("n", "o", 4);
-for(std::vector<TwoD_Interval>::const_iterator it = s.begin(); it != s.end(); it++) {
+r = a.topK("n", "o", 4);
+for(std::vector<TwoD_Interval>::const_iterator it = r.begin(); it != r.end(); it++) {
   std::cout<<"("<<it->GetLowPoint()<<","<<it->GetHighPoint()<<","<<it->GetMaxTimeStamp()<<")"<<std::endl;
   }
 
